@@ -1,0 +1,12 @@
+<div class="container">
+    <app-sidebar 
+    (searchQueryChanged)="updateSearchChange($event)"
+    (categoryChanged)="updateCategoryChange($event)"
+    ></app-sidebar>
+
+    <app-product-list
+    [selectedCategory]="selectedCategory()"
+    [searchText] = "searchTerm()"
+    [products] = "products()"
+    ></app-product-list>
+</div>

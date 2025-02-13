@@ -1,0 +1,30 @@
+.form-container {
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    div {
+      small {
+        color: red;
+      }
+    }
+  }
+  
+  input {
+    margin: 10px 0;
+    padding: 8px;
+  }
+  
+  button {
+    background-color: grey;
+    color: #000000;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
