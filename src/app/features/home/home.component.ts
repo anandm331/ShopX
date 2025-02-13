@@ -3,11 +3,13 @@ import { SidebarComponent } from '../../shared/components/sidebar/sidebar.compon
 import { ProductListComponent } from '../../shared/components/product-list/product-list.component';
 import { ProductService } from '../../core/services/product/product.service';
 import { Product } from '../../shared/models/product';
+import { CommonModule } from '@angular/common';
+import { CartService } from '../../core/services/cart/cart-service.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SidebarComponent, ProductListComponent],
+  imports: [SidebarComponent, ProductListComponent, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -18,14 +20,17 @@ export class HomeComponent {
 
   product_Service = inject(ProductService);
 
-  constructor() {
+  constructor(private cartService: CartService) {
     this.getProducts(); 
+    this.cartService.productRemoved$.subscribe((product) => {
+    this.products.update(products => products.filter((p) => p.id !== product.id));
+    });
   }
 
   getProducts() {
     this.product_Service.getProducts().subscribe({
       next: (data) => {
-        this.products.set(data); // Set only 'products' from the response
+        this.products.set(data); 
         console.log(this.products());
       },
       error: (err) => {

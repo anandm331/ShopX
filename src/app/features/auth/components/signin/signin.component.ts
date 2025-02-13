@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import {ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-signin',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.scss'
 })
@@ -26,7 +26,7 @@ export class SigninComponent {
     
         if (isAuthenticated) {
           alert("Sign in successfully");
-          this.router.navigate(['/']);
+          this.router.navigate(['home']);
         } else {
           alert('Invalid email or password!');
         }

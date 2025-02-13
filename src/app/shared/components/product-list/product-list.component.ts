@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
 import { FilterPipe } from '../../pipes/filter.pipe';
+import { CartService } from '../../../core/services/cart/cart-service.service';
 
 @Component({
   selector: 'app-product-list',
@@ -13,13 +14,14 @@ import { FilterPipe } from '../../pipes/filter.pipe';
 export class ProductListComponent {
  @Input({required: true}) selectedCategory!: string;
  @Input({required: true}) searchText: string = "";
- @Input({required: true}) products!: Product[];  
+ @Input({required: true}) products!: Product[]; 
 
- constructor() {
+ constructor(private cartService: CartService) {
   console.log(this.selectedCategory);
  }
 
- addToCart(product: any) {
-
- }
+ addToCart(product: Product) {
+  this.cartService.addToCart(product);
+  console.log(`${product.title} added to cart`);
+}
 }

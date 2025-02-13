@@ -3,6 +3,11 @@ import { AuthGuard } from './core/guards/authGuard/auth.guard';
 
 export const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'signin',
+    pathMatch: 'full',
+  },
+  {
     path: 'signin',
     loadComponent: () =>
       import('./features/auth/components/signin/signin.component').then(
@@ -17,11 +22,23 @@ export const routes: Routes = [
       ),
   },
   {
-    path: '',
+    path: 'home', 
     loadComponent: () =>
       import('./features/home/home.component').then(
         (com) => com.HomeComponent
       ),
-      canActivate: [AuthGuard],
+    canActivate: [AuthGuard], 
+  },
+  {
+    path: 'cart',
+    loadComponent: () =>
+      import('./features/cart/cart.component').then(
+        (com) => com.CartComponent
+      ),
+      canActivate: [AuthGuard], 
+  },
+  {
+    path: '**', 
+    redirectTo: 'signin',
   },
 ];

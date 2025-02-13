@@ -7,9 +7,33 @@
     display: flex;
 }
 
-.button-cart {
-    justify-content: space-between;
-}
+.button-spacing {
+    margin-bottom: 15px; 
+  }
 
+@mixin button-style($bgColor, $textColor) {
+    background-color: $bgColor;
+    color: $textColor;
+    width: 50%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+  
+    &:hover {
+      background-color: darken($bgColor, 10%);
+    }
+  }
+  
+  .button-cart {
+    @include button-style(orange, white);
+  }
+  
+  .button-buy {
+    @include button-style(gray, white);
+  }
+  
+  
 
   
