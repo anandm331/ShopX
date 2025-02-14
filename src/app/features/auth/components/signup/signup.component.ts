@@ -5,9 +5,11 @@ import {
   AbstractControl,
   FormBuilder,
   FormGroup,
-  ReactiveFormsModule,
-  ValidationErrors,
+  FormArray,
+  FormControl,
   Validators,
+  ValidationErrors,
+  ReactiveFormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -20,33 +22,37 @@ import { CommonModule } from '@angular/common';
 })
 export class SignupComponent {
   signUpForm: FormGroup;
+  formFields = [
+    { name: 'email', type: 'email', validators: [Validators.required, Validators.email] },
+    { name: 'password', type: 'password', validators: [Validators.required, Validators.minLength(6)] },
+    { name: 'confirmPassword', type: 'password', validators: [Validators.required] },
+  ];
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService
   ) {
-      this.signUpForm = this.fb.group(
-        {
-          email: ['', [Validators.required, Validators.email]],
-          password: ['', [Validators.required, Validators.minLength(6)]],
-          confirmPassword: ['', [Validators.required]],
-        },
-        { validators: this.passwordMatchValidator } 
-      );
-  
-      this.signUpForm.get('password')?.valueChanges.subscribe(() => {
-        this.signUpForm.get('confirmPassword')?.updateValueAndValidity();
-      });
+    this.signUpForm = this.fb.group(
+      this.createFormControls(),
+      { validators: this.passwordMatchValidator }
+    );
+  }
+
+  createFormControls() {
+    const controls: any = {};
+    this.formFields.forEach(field => {
+      controls[field.name] = new FormControl('', field.validators);
+    });
+    return controls;
   }
 
   passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
-    if (password && confirmPassword && password !== confirmPassword) {
-      return { passwordMismatch: true }; 
-    }
-    return null;
+    return password && confirmPassword && password !== confirmPassword
+      ? { passwordMismatch: true }
+      : null;
   }
 
   get passwordMismatch(): boolean {
@@ -64,7 +70,6 @@ export class SignupComponent {
       }
     } else {
       this.signUpForm.markAllAsTouched();
-      return;
     }
   }
 }

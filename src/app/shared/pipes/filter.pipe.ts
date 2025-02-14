@@ -9,15 +9,17 @@ export class FilterPipe implements PipeTransform {
     if (!products) return [];
     let filteredProducts = products;
 
+    const trimSearchQuery = searchQuery.trim();
+
     if (category && category !== 'All') {
       filteredProducts = filteredProducts.filter(
         (p) => p.category === category.toLowerCase()
       );
     }
 
-    if (searchQuery) {
+    if (trimSearchQuery) {
       filteredProducts = filteredProducts.filter((p) =>
-        p.title.toLowerCase().includes(searchQuery.toLowerCase())
+        p.title.toLowerCase().includes(trimSearchQuery.toLowerCase())
       );
     }
 

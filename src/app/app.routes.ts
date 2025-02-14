@@ -38,6 +38,15 @@ export const routes: Routes = [
       canActivate: [AuthGuard], 
   },
   {
+    path: 'product/:id',
+    loadComponent: () =>
+      import('./features/product-details/product-details.component').then(
+        (com) => com.ProductDetailsComponent
+      ),
+      canActivate: [AuthGuard],
+  },
+  
+  {
     path: '**', 
     redirectTo: 'signin',
   },

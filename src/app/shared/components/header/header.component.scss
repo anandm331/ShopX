@@ -7,22 +7,26 @@
     align-items: center;
   }
   
-  .auth-buttons button {
-    margin-left: 10px;
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
-  }
+  .auth-buttons {
+    button {
+      margin-left: 10px;
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+    }
   
-  .auth-buttons button:first-child {
-    background: #ffffff;
-    color: #1a1859;
-    border-radius: 5px;
-  }
+    .btn-shared {
+      background: #ffffff;
+      color: #0a0842;
+      border-radius: 5px;
+    }
   
-  .auth-buttons button:last-child {
-    background: #ffffff;
-    color: #1a1859;
-    border-radius: 5px;
+    button:first-child {
+      @extend .btn-shared;
+    }
+  
+    button:last-child {
+      @extend .btn-shared;
+    }
   }
   

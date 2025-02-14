@@ -1,25 +1,28 @@
 <div class="container-fluid">
     <div class="row g-3">
-      <div *ngFor="let product of products | filter : searchText : selectedCategory" class="col-lg-4 col-md-6 col-sm-12">
-        <div class="card h-100 shadow-sm">
-          <img [src]="product.images" class="card-img-top img-fluid card-image" alt="{{ product.brand }}">
-          <div class="card-body d-flex flex-column text-center">
-            <h3 class="card-title">{{ product.title }}</h3>
-            <h5 class="card-title">Brand: {{ product.brand }}</h5>
-            <p class="card-text">Category :{{product.category}}</p>
-            <p class="card-text">Stock: {{ product.stock }}</p>
-            <p class="fw-bold text-primary">${{ product.price }}</p>
-            <p>{{product.description}}</p>
-            <div class="mt-auto">
-              <button class="btn btn-warning w-100 mb-2 button-cart button-spacing" (click)="addToCart(product)">Add to Cart</button>
-              <button class="btn btn-secondary w-100 button-buy">Buy Now</button>
+        <div *ngFor="let product of products | filter : searchText : selectedCategory"
+            class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card h-100 shadow-sm">
+                <img [src]="product.images" class="card-img-top img-fluid card-image" alt="{{ product.brand }}">
+                <div class="card-body d-flex flex-column text-center">
+                    <h3 class="card-title">{{ product.title }}</h3>
+                    <h5 class="card-title">Brand: {{ product.brand }}</h5>
+                    <p class="card-text">Category :{{product.category}}</p>
+                    <p class="card-text" [ngClass]="{ 'high-stock': product.stock > 10, 
+                    'low-stock': product.stock > 0 && product.stock <= 10}">
+                        Stock: {{ product.stock }}</p>
+                    <p class="fw-bold text-primary">${{ product.price }}</p>
+                    <p>{{product.description}}</p>
+                    <div class="mt-auto">
+                        <button class="btn btn-warning w-100 mb-2 button-cart button-spacing"
+                            (click)="addToCart(product)">Add to Cart</button>
+                        <button class="btn btn-secondary w-100 button-buy">Buy Now</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-secondary w-100 button-view" (click)="viewProductDetails(product.id)">View Details</button>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  
-  
- 
-  
+</div>

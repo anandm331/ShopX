@@ -1,6 +1,6 @@
 <header class="header">
     <h1>Shopify</h1>
-    <div *ngIf="!isAuthPage()">
+    <div class="auth-buttons" *ngIf="!isAuthPage()">
         <button routerLink="/cart">{{cart()}}</button>
         <button (click)="logOut()">Log Out</button>
     </div>

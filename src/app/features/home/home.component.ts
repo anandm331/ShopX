@@ -5,6 +5,7 @@ import { ProductService } from '../../core/services/product/product.service';
 import { Product } from '../../shared/models/product';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../core/services/cart/cart-service.service';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -28,9 +29,11 @@ export class HomeComponent {
   }
 
   getProducts() {
-    this.product_Service.getProducts().subscribe({
+    this.product_Service.getProducts().pipe(
+      delay(500) 
+    ).subscribe({
       next: (data) => {
-        this.products.set(data); 
+        this.products.set(data);
         console.log(this.products());
       },
       error: (err) => {
@@ -38,6 +41,8 @@ export class HomeComponent {
       }
     });
   }
+  
+  
 
   updateCategoryChange(category: string) {
     console.log(category);

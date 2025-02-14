@@ -18,6 +18,7 @@ export class SigninComponent {
         password: ['', [Validators.required, Validators.minLength(6)]]
       });
     }
+    
     onSubmit() {
       if (this.loginForm.valid) {
         const { email, password } = this.loginForm.value;
