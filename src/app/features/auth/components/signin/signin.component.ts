@@ -21,19 +21,27 @@ export class SigninComponent {
     
     onSubmit() {
       if (this.loginForm.valid) {
-        const { email, password } = this.loginForm.value;
-        
-        const isAuthenticated = this.authService.signIn(email, password);
+        const { email, password } = this.loginForm.value; 
+        debugger   
+        if (this.authService.signIn(email, password)) {
+          const role = this.authService.getUserRole();
     
-        if (isAuthenticated) {
-          alert("Sign in successfully");
-          this.router.navigate(['home']);
+          alert(`Login successful! You are logged in as ${role}`);
+    
+          if (role === 'admin') {
+            console.log("admin");
+            this.router.navigate(['/admin-home']);
+          } else {
+            console.log("l00ogged");
+            this.router.navigate(['/home']);
+          }
         } else {
-          alert('Invalid email or password!');
+          alert('Invalid credentials');
         }
+      }
       }
     }
     
-  }
+  
   
 

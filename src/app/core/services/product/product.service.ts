@@ -21,12 +21,7 @@ export class ProductService {
     );
   }
 
-  getProductsById(id:number): Observable<Product | undefined> {
-    return this.http.get<Product>(`${this.productApi}/${id}`).pipe(
-      catchError((error) => {
-        console.error(`Error fetching product with ID ${id}:`, error);
-        return of(undefined); 
-      })
-    );
-  }
+  getProductsById(id:number): Observable<Product> {
+    return this.http.get<Product>(`${this.productApi}/${id}`);
+ }
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
 import { ProductService } from '../../core/services/product/product.service';
 import { Product } from '../../shared/models/product';
 import { CommonModule } from '@angular/common';
@@ -13,18 +12,27 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit {
-  product: Product | undefined;
+  product!: Product;
 
   constructor(private route: ActivatedRoute, private productService: ProductService) {}
 
-  async ngOnInit(): Promise<void> {
+   ngOnInit()  {
+    this.loadProduct();
+   }
+   
+   loadProduct(): void {
     const productId = Number(this.route.snapshot.paramMap.get('id'));
-    if (productId) {
-      try {
-        this.product = await firstValueFrom(this.productService.getProductsById(productId));
-      } catch (error) {
-        console.error('Error fetching product details:', error);
-      }
+    if (!productId) {
+      console.error('Invalid product ID');
+      return;
     }
+
+    this.productService.getProductsById(productId).subscribe({
+      next: (data) => {
+      this.product = data
+      console.log("products details",this.product);
+      },
+      error: (err) => console.error('Error fetching product:', err)
+    });
   }
-}
+  }

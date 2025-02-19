@@ -8,7 +8,23 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class AuthService {
   private authState = new BehaviorSubject<boolean>(this.hasToken());
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    this.initializeAdminUser();
+  }
+
+  private initializeAdminUser(): void {
+    const adminUser = {
+      username: 'admin@gmail.com',
+      password: 'admin123',
+      role: 'admin',
+    };
+
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    if (!users.some((user: any) => user.username === 'admin')) {
+      users.push(adminUser);
+      localStorage.setItem('users', JSON.stringify(users));
+    }
+  }
 
   private hasToken(): boolean {
     return !!localStorage.getItem('authToken');
@@ -21,7 +37,8 @@ export class AuthService {
       return false; 
     }
 
-    users.push({ username, password });
+    const newUser = { username, password, role: 'user' }; 
+    users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
     return true;
   }
@@ -32,6 +49,7 @@ export class AuthService {
 
     if (user) {
       localStorage.setItem('authToken', username);
+      localStorage.setItem('loggedInUser', JSON.stringify(user));
       this.authState.next(true);
       return true;
     }
@@ -40,8 +58,14 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('loggedInUser');
     this.authState.next(false);
     this.router.navigate(['/signin']);
+  }
+
+  getUserRole(): string {
+    const user = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+    return user?.role || '';
   }
 
   isAuthenticated(): Observable<boolean> {

@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/authGuard/auth.guard';
+import { ADMIN_ROUTES } from './features/admin/admin.route';
 
 export const routes: Routes = [
   {
@@ -7,6 +8,15 @@ export const routes: Routes = [
     redirectTo: 'signin',
     pathMatch: 'full',
   },
+  {
+      path: 'admin-home', 
+      loadComponent: () =>
+        import('./features/admin/admin-home/admin-home.component').then(
+          (com) => com.AdminHomeComponent
+        ),
+      canActivate: [AuthGuard], 
+      data: { role: 'admin' } 
+   },
   {
     path: 'signin',
     loadComponent: () =>
@@ -28,6 +38,7 @@ export const routes: Routes = [
         (com) => com.HomeComponent
       ),
     canActivate: [AuthGuard], 
+    data: { role: 'user' } 
   },
   {
     path: 'cart',
@@ -36,6 +47,7 @@ export const routes: Routes = [
         (com) => com.CartComponent
       ),
       canActivate: [AuthGuard], 
+      data: { role: 'user' } 
   },
   {
     path: 'product/:id',
@@ -44,6 +56,7 @@ export const routes: Routes = [
         (com) => com.ProductDetailsComponent
       ),
       canActivate: [AuthGuard],
+      data: {role: 'user'}
   },
   
   {
