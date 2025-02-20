@@ -9,14 +9,11 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-      path: 'admin-home', 
-      loadComponent: () =>
-        import('./features/admin/admin-home/admin-home.component').then(
-          (com) => com.AdminHomeComponent
-        ),
-      canActivate: [AuthGuard], 
-      data: { role: 'admin' } 
-   },
+    path: 'admin',
+    children: ADMIN_ROUTES, 
+    canActivate: [AuthGuard], 
+    data: { role: 'admin' }
+  },
   {
     path: 'signin',
     loadComponent: () =>

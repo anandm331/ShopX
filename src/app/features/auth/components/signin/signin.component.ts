@@ -30,7 +30,7 @@ export class SigninComponent {
     
           if (role === 'admin') {
             console.log("admin");
-            this.router.navigate(['/admin-home']);
+            this.router.navigate(['/admin']);
           } else {
             console.log("l00ogged");
             this.router.navigate(['/home']);

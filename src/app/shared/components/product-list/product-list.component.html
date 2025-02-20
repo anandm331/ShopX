@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div #product class="container-fluid">
     <div class="row g-3">
         <div *ngFor="let product of products | filter : searchText : selectedCategory"
             class="col-lg-4 col-md-6 col-sm-12">
@@ -19,10 +19,13 @@
                         <button class="btn btn-secondary w-100 button-buy">Buy Now</button>
                     </div>
                     <div>
-                        <button class="btn btn-secondary w-100 button-view" (click)="viewProductDetails(product.id)">View Details</button>
+                        <button class="btn btn-secondary w-100 button-view" (click)="viewProductDetails(product)">View Details</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<ng-container appDetailsHost></ng-container>
+
+
