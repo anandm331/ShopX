@@ -6,6 +6,7 @@ import { Product } from '../../../shared/models/product';
 
 @Component({
   selector: 'app-admin-home',
+  standalone: true,
   imports: [SidebarComponent, RouterModule, ProductListComponent],
   templateUrl: './admin-home.component.html',
   styleUrl: './admin-home.component.scss'
@@ -14,6 +15,7 @@ export class AdminHomeComponent {
   selectedCategory = signal<string>('All');
   searchTerm = signal<string>('');
   products= signal<Product[]>([]);
+  showAdd= signal<boolean>(true);
 
   updateCategoryChange(category: string) {
     console.log(category);

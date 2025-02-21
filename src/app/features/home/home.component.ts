@@ -18,6 +18,7 @@ export class HomeComponent {
   products = signal<Product[]>([]); 
   selectedCategory = signal<string>('All');
   searchTerm = signal<string>('');
+  showAdd = signal<boolean>(false);
 
   product_Service = inject(ProductService);
 

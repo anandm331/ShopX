@@ -1,5 +1,8 @@
 <div #product class="container-fluid">
     <div class="row g-3">
+        <div class="row" *ngIf="show">
+            <button class="btn btn-secondary w-100 button-buy" (click)="navigateToAdd()">Add Product</button>
+        </div>
         <div *ngFor="let product of products | filter : searchText : selectedCategory"
             class="col-lg-4 col-md-6 col-sm-12">
             <div class="card h-100 shadow-sm">

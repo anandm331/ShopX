@@ -11,5 +11,14 @@ export const ADMIN_ROUTES: Routes = [
           ),
         canActivate: [AuthGuard], 
         data: { role: 'admin' } 
-     },
+    },
+    {
+        path: 'add-products', 
+        loadComponent: () =>
+          import('../admin/add-product/add-product.component').then(
+            (com) => com.AddProductComponent
+          ),
+        canActivate: [AuthGuard], 
+        data: { role: 'admin' } 
+    },
 ];

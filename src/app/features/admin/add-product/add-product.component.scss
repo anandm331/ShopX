@@ -1,0 +1,100 @@
+$primary-color: #007bff;
+$danger-color: #dc3545;
+$light-gray: #ccc;
+$shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+@mixin focus-effect {
+  border-color: $primary-color;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: $shadow;
+  padding: 20px;
+  background: #fff;
+
+  .card-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-weight: bold;
+  }
+
+  .form-control,
+  .form-select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid $light-gray;
+    transition: border-color 0.3s ease-in-out;
+
+    &:focus {
+      @include focus-effect;
+    }
+  }
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .form-check-input {
+    transform: scale(1.2);
+  }
+}
+
+.text-danger {
+  font-size: 14px;
+  color: $danger-color;
+}
+
+.btn {
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 5px;
+
+  &.btn-primary {
+    background-color: $primary-color;
+    border: none;
+
+    &:disabled {
+      background-color: lighten($primary-color, 30%);
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}

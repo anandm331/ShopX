@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">{{ formTitle }}</h2>
+  
+        <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
+          <div class="form-grid">
+            <div *ngFor="let field of formSchema" class="form-group">
+              <label class="form-label">{{ field.label }}</label>
+  
+              <input
+                *ngIf="field.type === 'text' || field.type === 'number'"
+                [type]="field.type"
+                [formControlName]="field.name"
+                class="form-control"
+              />
+  
+              <textarea *ngIf="field.type === 'textarea'" [formControlName]="field.name" class="form-control"></textarea>
+  
+              <div *ngIf="field.type === 'checkbox'" class="form-check">
+                <input type="checkbox" [formControlName]="field.name" class="form-check-input" />
+                <label class="form-check-label">{{ field.label }}</label>
+              </div>
+  
+              <select *ngIf="field.type === 'select'" [formControlName]="field.name" class="form-select">
+                <option *ngFor="let option of field.options" [value]="option">{{ option }}</option>
+              </select>
+  
+              <div *ngIf="addProductForm.controls[field.name].invalid && addProductForm.controls[field.name].touched">
+                <small class="text-danger" *ngIf="addProductForm.controls[field.name].errors?.['required']">
+                  {{ field.label }} is required
+                </small>
+              </div>
+            </div>
+          </div>
+  
+          <button type="submit" class="btn btn-primary w-100 mt-3" [disabled]="addProductForm.invalid">
+            Add Product
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
