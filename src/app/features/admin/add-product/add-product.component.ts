@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { PRODUCT_FORM_CONFIG } from '../../../config/product.config';
 import { CustomValidators } from '../../../shared/Validators/custom-product-validators';
@@ -11,7 +11,6 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   styleUrls: ['./add-product.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated, 
 })
 export class AddProductComponent implements OnInit {
   addProductForm!: FormGroup;
