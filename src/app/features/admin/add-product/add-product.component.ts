@@ -58,9 +58,14 @@ export class AddProductComponent implements OnInit {
     if (this.addProductForm.valid) {
       console.log('Product Added:', this.addProductForm.value);
       alert('Product added successfully!');
+  
+      const existingProducts = JSON.parse(localStorage.getItem('Products') || '[]');
+       existingProducts.push(this.addProductForm.value);
+        localStorage.setItem('Products', JSON.stringify(existingProducts));
       this.addProductForm.reset();
     } else {
       console.log('Form is invalid');
     }
   }
+  
 }

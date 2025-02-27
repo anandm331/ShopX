@@ -18,9 +18,10 @@
       <h3>{{ product.title }}</h3>
       <h5>Brand: {{ product.brand }}</h5>
       <p><strong>Category:</strong> {{ product.category }}</p>
-      <p><strong>Stock:</strong> {{ product.stock }}</p>
+      <p appMouseDirective><strong>Stock:</strong> {{ product.stock }}</p>
       <p class="fw-bold text-primary fs-4">${{ product.price }}</p>
-      <p>{{ product.description }}</p>
+      <p appHighlight>{{ product.description }}</p>
+      <p appMouseDirective>kkk</p>
       <button (click)="close()">Close</button>
     </div>
   </div>

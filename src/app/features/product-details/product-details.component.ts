@@ -3,11 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../core/services/product/product.service';
 import { Product } from '../../shared/models/product';
 import { CommonModule } from '@angular/common';
+import { HighlightDirective } from '../../shared/directives/highlight.directive';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HighlightDirective ],
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss']
 })

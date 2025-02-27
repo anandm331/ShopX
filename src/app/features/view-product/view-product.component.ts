@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { HighlightDirective } from '../../shared/directives/highlight.directive';
+import { MouseDirectiveDirective } from '../../shared/directives/mouse-directive.directive';
 
 @Component({
   selector: 'app-view-product',
-  imports: [CommonModule],
+  imports: [CommonModule, HighlightDirective, MouseDirectiveDirective],
   standalone: true,
   templateUrl: './view-product.component.html',
   styleUrl: './view-product.component.scss'
